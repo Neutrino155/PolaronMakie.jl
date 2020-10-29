@@ -10,9 +10,9 @@ MakieLayout = "5a521ce4-ebb9-4793-b5b7-b334dfe8393c"
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 
 [compat]
-AbstractPlotting = "0.13.0, 0.13.2"
+AbstractPlotting = "0.9.0, 0.13.2"
 GLMakie = "0.1.0"
-MakieLayout = "0.9.0, 0.9.10"
+MakieLayout = "0.1.0, 0.9.10"
 julia = "1.0"
 
 [extras]
