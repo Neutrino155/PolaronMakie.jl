@@ -1,4 +1,10 @@
 name = "PolaronMakie"
-uuid = "88b56335-9a94-46f9-a56f-1a889880bdc4"
+uuid = "a3d5612c-6665-44da-b73b-aebf26fd4c82"
 authors = ["Bradley Martin <neutrino155@gmail.com>"]
 version = "0.1.0"
+
+[deps]
+AbstractPlotting = "537997a7-5e4e-5d89-9595-2241ea00577e"
+GLMakie = "e9467ef8-e4e7-5192-8a1a-b1aee30e663a"
+MakieLayout = "5a521ce4-ebb9-4793-b5b7-b334dfe8393c"
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
