@@ -185,6 +185,7 @@ function viewfunction(
         fv.ℜ_matrix,
         levels = 30,
         linewidth = 1,
+        transformation = (:xy, -5.0 + minimum(filter(!isnan, [to_value(fv.ℜ_matrix)...])))
     )
     wireframe!(
         real_scene,
@@ -196,7 +197,7 @@ function viewfunction(
         color = (:black, 0.15),
     )
 
-    sℑ = surface!(imag_scene, fv.limits[1], fv.limits[2], fv.ℑ_matrix)
+    sℑ = surface!(imag_scene, fv.limits[1], fv.limits[2], fv.ℑ_matrix, scale_plot = false)
     cℑ = contour!(
         imag_scene,
         fv.limits[1],
@@ -204,7 +205,9 @@ function viewfunction(
         fv.ℑ_matrix,
         levels = 30,
         linewidth = 1,
+        transformation = (:xy, -5.0 + minimum(filter(!isnan, [to_value(fv.ℑ_matrix)...])))
     )
+
     wireframe!(
         imag_scene,
         fv.limits[1],
@@ -215,21 +218,9 @@ function viewfunction(
         color = (:black, 0.15),
     )
 
-    lift(x_slider.value, y_slider.value, fv.ℜ_matrix, fv.ℑ_matrix) do x, y, ℜz, ℑz
-        scale!(
-            sℜ,
-            2 * (to_value(x)) / axis_limits[1],
-            2 * (to_value(y)) / axis_limits[1],
-            1,
-        )
-        scale!(
-            sℑ,
-            2 * (to_value(x)) / axis_limits[1],
-            2 * (to_value(y)) / axis_limits[1],
-            1,
-        )
-        transform!(cℜ, (:xy, -1.1 + minimum(filter(!isnan, [to_value(ℜz)...]))))
-        transform!(cℑ, (:xy, -1.1 + minimum(filter(!isnan, [to_value(ℑz)...]))))
+    lift(fv.ℜ_matrix, fv.ℑ_matrix, z_slider.value) do ℜz, ℑz, z
+        translate!(cℜ, 0, 0, -5.0 + minimum(filter(!isnan, [to_value(ℜz)...])))
+        translate!(cℑ, 0, 0, -5.0 + minimum(filter(!isnan, [to_value(ℑz)...])))
     end
 
     AbstractPlotting.display(scene)
