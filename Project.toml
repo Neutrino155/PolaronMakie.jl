@@ -8,3 +8,15 @@ AbstractPlotting = "537997a7-5e4e-5d89-9595-2241ea00577e"
 GLMakie = "e9467ef8-e4e7-5192-8a1a-b1aee30e663a"
 MakieLayout = "5a521ce4-ebb9-4793-b5b7-b334dfe8393c"
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[compat]
+AbstractPlotting = "0.13"
+Makie = "0.11.1"
+MakieLayout = "0.9.10"
+julia = "1"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Test"]

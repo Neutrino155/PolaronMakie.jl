@@ -1,4 +1,5 @@
-using PolaronMakie
+import .PolaronMakie
+using .PolaronMakie
 
 function ℜD(x, y, v, w, β)
     R = (v^2 - w^2) / (w^2 * v)
