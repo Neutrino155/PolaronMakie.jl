@@ -11,7 +11,7 @@ Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 
 [compat]
 AbstractPlotting = "0.13"
-Makie = "0.11.1"
+GLMakie = "0.11.1"
 MakieLayout = "0.9.10"
 julia = "1"
 
