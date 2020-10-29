@@ -1,0 +1,4 @@
+name = "PolaronMakie"
+uuid = "88b56335-9a94-46f9-a56f-1a889880bdc4"
+authors = ["Bradley Martin <neutrino155@gmail.com>"]
+version = "0.1.0"
