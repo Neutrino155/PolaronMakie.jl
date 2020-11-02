@@ -1,7 +1,7 @@
 name = "PolaronMakie"
 uuid = "a3d5612c-6665-44da-b73b-aebf26fd4c82"
 authors = ["Bradley Martin <neutrino155@gmail.com>"]
-version = "0.1.0"
+version = "0.1.1"
 
 [deps]
 AbstractPlotting = "537997a7-5e4e-5d89-9595-2241ea00577e"
