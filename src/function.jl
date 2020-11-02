@@ -16,11 +16,11 @@ function functionview(
     params::Tuple,
     sliders::Tuple,
     annotations::Dict{String,String};
-    length = 100,
+    len = 100,
 )
 
-    x_lim = lift(x -> range(-x, stop = x, length = length), sliders[1].value)
-    y_lim = lift(x -> range(-x, stop = x, length = length), sliders[2].value)
+    x_lim = lift(x -> range(-x, stop = x, length = len), sliders[1].value)
+    y_lim = lift(x -> range(-x, stop = x, length = len), sliders[2].value)
     limits = (x_lim, y_lim)
 
     ℜ_matrix = lift(map(s -> s.value, sliders)...) do x_max, y_max, z_max, params...
@@ -28,8 +28,8 @@ function functionview(
         [
             ifelse(abs(ℜf(x, y)) < z_max, ℜf(x, y), NaN)
             for
-            x in range(-x_max, stop = x_max, length = length),
-            y in range(-y_max, stop = y_max, length = length)
+            x in range(-x_max, stop = x_max, length = len),
+            y in range(-y_max, stop = y_max, length = len)
         ]
     end
 
@@ -38,8 +38,8 @@ function functionview(
         [
             ifelse(abs(ℑf(x, y)) < z_max, ℑf(x, y), NaN)
             for
-            x in range(-x_max, stop = x_max, length = length),
-            y in range(-y_max, stop = y_max, length = length)
+            x in range(-x_max, stop = x_max, length = len),
+            y in range(-y_max, stop = y_max, length = len)
         ]
     end
 
@@ -53,6 +53,7 @@ function viewfunction(
     ℜ,
     ℑ,
     params::Tuple,
+    param_initial_values::Tuple,
     param_limits::Tuple,
     annotations::Dict{String,String};
     axis_limits = (20, 20, 20),
@@ -64,7 +65,7 @@ function viewfunction(
     scene, layout = layoutscene(
         outer_padding,
         resolution = resolution,
-        backgroundcolor = RGBf0(0.98, 0.98, 0.98),
+        backgroundcolor = RGBf0(0.99, 0.99, 0.99),
     )
     makescene() = LScene(
         scene,
@@ -149,7 +150,7 @@ function viewfunction(
                     tellwidth = true,
                     height = nothing,
                     width = Auto(),
-                    startvalue = 1.0,
+                    startvalue = param_initial_values[p],
                 )
             )
         @eval value = $slider.value
