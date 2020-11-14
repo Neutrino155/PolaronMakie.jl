@@ -16,11 +16,12 @@ function functionview(
     params::Tuple,
     sliders::Tuple,
     annotations::Dict{String,String};
+    axis_limits = ((-20, 20), (-20, 20), (-20, 20)),
     len = 100,
 )
 
-    x_lim = lift(x -> range(-x, stop = x, length = len), sliders[1].value)
-    y_lim = lift(x -> range(-x, stop = x, length = len), sliders[2].value)
+    x_lim = lift(x -> range(axis_limits[1][1], stop = x, length = len), sliders[1].value)
+    y_lim = lift(x -> range(axis_limits[2][1], stop = x, length = len), sliders[2].value)
     limits = (x_lim, y_lim)
 
     ℜ_matrix = lift(map(s -> s.value, sliders)...) do x_max, y_max, z_max, params...
@@ -28,8 +29,8 @@ function functionview(
         [
             ifelse(abs(ℜf(x, y)) < z_max, ℜf(x, y), NaN)
             for
-            x in range(-x_max, stop = x_max, length = len),
-            y in range(-y_max, stop = y_max, length = len)
+            x in range(axis_limits[1][1], stop = x_max, length = len),
+            y in range(axis_limits[2][1], stop = y_max, length = len)
         ]
     end
 
@@ -38,8 +39,8 @@ function functionview(
         [
             ifelse(abs(ℑf(x, y)) < z_max, ℑf(x, y), NaN)
             for
-            x in range(-x_max, stop = x_max, length = len),
-            y in range(-y_max, stop = y_max, length = len)
+            x in range(axis_limits[1][1], stop = x_max, length = len),
+            y in range(axis_limits[2][1], stop = y_max, length = len)
         ]
     end
 
@@ -54,9 +55,9 @@ function viewfunction(
     ℑ,
     params::Tuple,
     param_initial_values::Tuple,
-    param_limits::Tuple,
+    param_limits,
     annotations::Dict{String,String};
-    axis_limits = (20, 20, 20),
+    axis_limits = ((-20, 20), (-20, 20), (-20, 20)),
     len = 100,
     resolution = (1500, 800),
 )
@@ -111,16 +112,17 @@ function viewfunction(
         slider_value = Symbol(coord, '_', "slider", '_', "value")
 
         @eval $slider_label = $(layout[3+c, 1] = LText(scene, coord, textsize = 20))
+
         @eval $slider =
             $(
                 layout[3+c, 2:3] = LSlider(
                     scene,
-                    range = 0.1:0.01:axis_limits[c],
+                    range = axis_limits[c][1]:0.01:axis_limits[c][2],
                     horizontal = true,
                     tellheight = true,
                     width = nothing,
                     height = Auto(),
-                    startvalue = axis_limits[c] / 2,
+                    startvalue = axis_limits[c][2],
                 )
             )
         @eval value = $slider.value
@@ -145,7 +147,7 @@ function viewfunction(
             $(
                 layout[2, 4+p] = LSlider(
                     scene,
-                    range = 0.1:0.01:param_limits[p],
+                    range = param_limits[p][1]:0.01:param_limits[p][2],
                     horizontal = false,
                     tellwidth = true,
                     height = nothing,
@@ -175,7 +177,7 @@ function viewfunction(
         )
 
     # Function data
-    fv = functionview(ℜ, ℑ, params, sliders, annotations)
+    fv = functionview(ℜ, ℑ, params, sliders, annotations, axis_limits = axis_limits)
 
     # Plotting
     sℜ = surface!(real_scene, fv.limits[1], fv.limits[2], fv.ℜ_matrix)
