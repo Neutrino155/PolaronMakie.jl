@@ -1,4 +1,3 @@
-import ..PolaronMakie
 using ..PolaronMakie
 
 mod_squared_D(x, y, v, w, β) = (ℜD(x, y, v, w, β))^2 + (ℑD(x, y, v, w, β))^2
@@ -7,12 +6,18 @@ arg_D(x, y, v, w, β) = atan(ℑD(x, y, v, w, β), ℜD(x, y, v, w, β))
 
 function ℜS(x, y, v, w, β, α)
     P = 1 / (exp(β) - 1)
-    (2 * α / (3 * sqrt(π))) * (exp(-y) * (1 + P) * cos(x - 3 * arg_D(x, y, v, w, β) / 2) + exp(y) * P * cos(x + 3 * arg_D(x, y, v, w, β) / 2)) / (mod_squared_D(x, y, v, w, β))^(3 / 4)
+    (2 * α / (3 * sqrt(π))) * (
+        exp(-y) * (1 + P) * cos(x - 3 * arg_D(x, y, v, w, β) / 2) +
+        exp(y) * P * cos(x + 3 * arg_D(x, y, v, w, β) / 2)
+    ) / (mod_squared_D(x, y, v, w, β))^(3 / 4)
 end
 
 function ℑS(x, y, v, w, β, α)
     P = 1 / (exp(β) - 1)
-    (2 * α / (3 * sqrt(π))) * (exp(-y) * (1 + P) * sin(x - 3 * arg_D(x, y, v, w, β) / 2) - exp(y) * P * sin(x + 3 * arg_D(x, y, v, w, β) / 2)) / (mod_squared_D(x, y, v, w, β))^(3 / 4)
+    (2 * α / (3 * sqrt(π))) * (
+        exp(-y) * (1 + P) * sin(x - 3 * arg_D(x, y, v, w, β) / 2) -
+        exp(y) * P * sin(x + 3 * arg_D(x, y, v, w, β) / 2)
+    ) / (mod_squared_D(x, y, v, w, β))^(3 / 4)
 end
 
 S(x, y, v, w, β, α) = ℜS(x, y, v, w, β, α) + 1im * ℑS(x, y, v, w, β, α)

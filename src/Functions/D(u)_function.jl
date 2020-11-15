@@ -1,10 +1,12 @@
-import ..PolaronMakie
 using ..PolaronMakie
 
 function ℜD(x, y, v, w, β)
     R = (v^2 - w^2) / (w^2 * v)
     P = 1 / (exp(v * β) - 1)
-    w^2 / v^2 * (R * cos(v * x) * (exp(-v * y) + 2 * P * cosh(v * y)) - (x^2 - y^2) / β - y - R * (2 * P + 1))
+    w^2 / v^2 * (
+        R * cos(v * x) * (exp(-v * y) + 2 * P * cosh(v * y)) - (x^2 - y^2) / β - y -
+        R * (2 * P + 1)
+    )
 end
 
 function ℑD(x, y, v, w, β)
