@@ -2,10 +2,10 @@ module PolaronMakie
 
 export viewfunction, ℜD, ℑD, D, ℜS, ℑS, S, ℜχ, ℑχ, χ
 
+using QuadGK
 using AbstractPlotting.MakieLayout
 using AbstractPlotting
 using GLMakie
-using QuadGK: quadgk
 using Plots
 
 include("../src/function.jl")

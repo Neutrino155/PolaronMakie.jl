@@ -1,6 +1,4 @@
-import ..PolaronMakie
 using ..PolaronMakie
-using QuadGK
 
 function ℜχ(Ω, β, α, v, w)
     integrand(x) = (1 - cos(Ω * x)) * ℑS(x, 0, v, w, β, α)
@@ -31,11 +29,11 @@ end
 #
 # vf = viewfunction(ℜχ, ℑχ, p, i, pl, a, axis_limits = al, len = 200)
 
-# v = range(0.0, stop = 100.0, length = 1000)
-# params = (100, 3.0, 3.4, 2.5)
-# ReX = [ℜχ(t, params...) for t in v]
-# ImX = [ℑχ(t, params...) for t in v]
-# plot(v, ReX, label = "ℜχ")
-# plot(v, ImX, label = "ℑχ")
-# xlabel!("Ω")
-# ylabel!("χ(Ω)")
+v = range(0.0, stop = 100.0, length = 1000)
+params = (100, 3.0, 3.4, 2.5)
+ReX = [ℜχ(t, params...) for t in v]
+ImX = [ℑχ(t, params...) for t in v]
+plot(v, ReX, label = "ℜχ")
+plot(v, ImX, label = "ℑχ")
+xlabel!("Ω")
+ylabel!("χ(Ω)")
