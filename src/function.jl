@@ -180,17 +180,17 @@ function viewfunction(
     fv = functionview(ℜ, ℑ, params, sliders, annotations, axis_limits = axis_limits)
 
     # Plotting
-    sℜ = surface!(real_scene, fv.limits[1], fv.limits[2], fv.ℜ_matrix)
-    cℜ = contour!(
+    sℜ = AbstractPlotting.surface!(real_scene, fv.limits[1], fv.limits[2], fv.ℜ_matrix)
+    cℜ = AbstractPlotting.contour!(
         real_scene,
         fv.limits[1],
         fv.limits[2],
         fv.ℜ_matrix,
         levels = 30,
         linewidth = 1,
-        transformation = (:xy, -5.0 + minimum(filter(!isnan, [to_value(fv.ℜ_matrix)...])))
+        transformation = (:xy, -5.0 + minimum(filter(!isnan, [to_value(fv.ℜ_matrix)...]))),
     )
-    wireframe!(
+    AbstractPlotting.wireframe!(
         real_scene,
         fv.limits[1],
         fv.limits[2],
@@ -200,18 +200,24 @@ function viewfunction(
         color = (:black, 0.15),
     )
 
-    sℑ = surface!(imag_scene, fv.limits[1], fv.limits[2], fv.ℑ_matrix, scale_plot = false)
-    cℑ = contour!(
+    sℑ = AbstractPlotting.surface!(
+        imag_scene,
+        fv.limits[1],
+        fv.limits[2],
+        fv.ℑ_matrix,
+        scale_plot = false,
+    )
+    cℑ = AbstractPlotting.contour!(
         imag_scene,
         fv.limits[1],
         fv.limits[2],
         fv.ℑ_matrix,
         levels = 30,
         linewidth = 1,
-        transformation = (:xy, -5.0 + minimum(filter(!isnan, [to_value(fv.ℑ_matrix)...])))
+        transformation = (:xy, -5.0 + minimum(filter(!isnan, [to_value(fv.ℑ_matrix)...]))),
     )
 
-    wireframe!(
+    AbstractPlotting.wireframe!(
         imag_scene,
         fv.limits[1],
         fv.limits[2],
