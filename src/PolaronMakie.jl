@@ -6,7 +6,7 @@ using QuadGK
 using ProgressBars
 using AbstractPlotting.MakieLayout
 using AbstractPlotting
-using GLMakie
+# using GLMakie
 using Optim
 
 include("../src/function.jl")
