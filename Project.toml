@@ -10,8 +10,8 @@ QuadGK = "1fd47b50-473d-5c70-9696-f719f8f3bcdc"
 Optim = "429524aa-4258-5aef-a3af-852621145aeb"
 
 [compat]
-AbstractPlotting = "≥ 0.12.5"
-Plots = "≥ 1.9.0"
-QuadGK = "≥ 2.4.1"
-Optim = "≥ 0.15.0"
-julia = "1"
+AbstractPlotting = "<= 0.13.6"
+Plots = "<= 1.9.0"
+QuadGK = "<= 2.4.1"
+Optim = "<= 0.15.0"
+julia = "<= 0.6.0"
