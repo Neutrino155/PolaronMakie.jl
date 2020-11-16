@@ -3,7 +3,6 @@ module PolaronMakie
 export viewfunction, frohlich_α, feynman_variation, osaka_free_energy, ℜD, ℑD, D, ℜS, ℑS, S, ℜχ, ℑχ, χ
 
 using QuadGK
-using ProgressBars
 using AbstractPlotting.MakieLayout
 using AbstractPlotting
 # using GLMakie
