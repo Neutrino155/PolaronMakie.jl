@@ -1,5 +1,17 @@
-using ..PolaronMakie
+# D(u)_function.jl
 
+"""
+Implementation of FHIP's susceptibility formula D(u) for the Optical Absorption of Polarons.
+
+See FHIP 1962, equation (35c):
+https://link.aps.org/doi/10.1103/PhysRev.127.1004.
+"""
+
+"""
+ℜD(x::Float64, y::Float64, v::Float64, w::Float64, β::Float64)
+
+    Calculate the real part of D(u) (equation (35c) in FHIP) for a complex argument u = x + iy. v and w are the variational Polaron parameters that minimise the free energy, for the supplied α Frohlich coupling. β is the reduced thermodynamical beta = ħω/kT with k being Boltzman's constant.
+"""
 function ℜD(x, y, v, w, β)
     R = (v^2 - w^2) / (w^2 * v)
     P = 1 / (exp(v * β) - 1)
@@ -9,27 +21,17 @@ function ℜD(x, y, v, w, β)
     )
 end
 
+"""
+ℑD(x::Float64, y::Float64, v::Float64, w::Float64, β::Float64)
+
+    Calculate the imaginary part of D(u) (equation (35c) in FHIP) for a complex argument u = x + iy. v and w are the variational Polaron parameters that minimise the free energy, for the supplied α Frohlich coupling. β is the reduced thermodynamical beta = ħω/kT with k being Boltzman's constant.
+"""
 function ℑD(x, y, v, w, β)
     R = (v^2 - w^2) / (w^2 * v)
     P = 1 / (exp(v * β) - 1)
     w^2 / v^2 * (R * sin(v * x) * (exp(-v * y) - 2 * P * sinh(v * y)) - x * (2 * y / β - 1))
 end
 
+# Create a complex number from the real and imaginary parts of D(u).
+
 D(x, y, v, w, β) = ℜD(x, y, v, w, β) + 1im * ℑD(x, y, v, w, β)
-
-# p = (:v, :w, :β)
-# i = (1.0, 1.0, 5.0)
-# pl = ((0.0, 10.0), (0.0, 10.0), (0.0, 10.0))
-# al = ((-25, 25), (-25, 25), (-25, 25))
-# a = Dict(
-#     "ℜ_title" => "Real D(u)",
-#     "ℜ_x" => "ℜ(u)",
-#     "ℜ_y" => "ℑ(u)",
-#     "ℜ_z" => "ℜ[D(u)]",
-#     "ℑ_title" => "Imaginary D(u)",
-#     "ℑ_x" => "ℜ(u)",
-#     "ℑ_y" => "ℑ(u)",
-#     "ℑ_z" => "ℑ[D(u)]",
-# )
-
-# vf = viewfunction(ℜD, ℑD, p, i, pl, a, axis_limits = al, len = 200)

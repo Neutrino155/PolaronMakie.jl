@@ -39,4 +39,4 @@ B(v, w, β, α) = α * v / (sqrt(π) * (exp(β) - 1)) * QuadGK.quadgk(x -> B_int
 C(v, w, β) = 3 / 4 * (v^2 - w^2) / v * (coth(v * β / 2) - 2 / (v * β))
 
 # Equation 62a in Hellwarth. In paragraph below Equation 22 in Osaka; has extra 1/β due to different definition of A, B & C.
-F(v, w, β, α) = -(A(v, w, β) + B(v, w, β, α) + C(v, w, β))
+osaka_free_energy(v, w, β, α) = -(A(v, w, β) + B(v, w, β, α) + C(v, w, β))
