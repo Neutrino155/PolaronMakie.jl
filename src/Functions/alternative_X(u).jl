@@ -1,6 +1,10 @@
 # import ..PolaronMakie
 # using ..PolaronMakie
 
+"""
+This is a playground for testing implementations of the X(u) function. Still need to find a detailed expansions of ReX(u) that is not horrific numerically, if such a thing exists!
+"""
+
 using BigCombinatorics
 using Combinatorics
 using SpecialFunctions: gamma, beta

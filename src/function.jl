@@ -1,3 +1,9 @@
+# function.jl
+
+"""
+Uses the AbstractPlotting.jl and MakieLayout.jl plotting packages to produce 3D interactive graphs of complex functions. The Real and Imaginary parts of the function are displayed side-by-side in two different 3D plots and can be altered by any finite number of sliders to change the value of any arguments they may depend on. Axis sliders are also present to either widen or focus the area of the graphs under investigation.
+"""
+
 mutable struct FunctionView
     params::Any
     sliders::Any
@@ -228,8 +234,8 @@ function viewfunction(
     )
 
     lift(fv.ℜ_matrix, fv.ℑ_matrix, z_slider.value) do ℜz, ℑz, z
-        translate!(cℜ, 0, 0, -5.0 + minimum(filter(!isnan, [to_value(ℜz)...])))
-        translate!(cℑ, 0, 0, -5.0 + minimum(filter(!isnan, [to_value(ℑz)...])))
+        AbstractPlotting.translate!(cℜ, 0, 0, -5.0 + minimum(filter(!isnan, [to_value(ℜz)...])))
+        AbstractPlotting.translate!(cℑ, 0, 0, -5.0 + minimum(filter(!isnan, [to_value(ℑz)...])))
     end
 
     AbstractPlotting.display(scene)

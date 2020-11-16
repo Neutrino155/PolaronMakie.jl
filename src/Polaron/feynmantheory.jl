@@ -7,8 +7,7 @@ See Feynman 1955:
 http://dx.doi.org/10.1103/PhysRev.97.660
 """
 
-using Optim
-using QuadGK
+using ..PolaronMakie
 
 # Equation 31: The <|X(t) - X(s)|^{-1}> * exp(-|t-w|) effective action.
 A_integrand(v, w, τ) = (w^2 * τ + (v^2 - w^2) / v * (1 - exp(-v * τ)))^(-0.5) * exp(-τ)
